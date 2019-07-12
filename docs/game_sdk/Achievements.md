@@ -13,6 +13,24 @@ You can also mark achievements as `secret` and `secure`. "Secret" achievements w
 
 ## Data Models
 
+###### Achievement Struct
+| name            | type             | description                                                                                                                       |
+| --------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| application_id  | Int64            | the unique id of the application                                                                                                  |
+| name            | object           | the name of the achievement as an [achievement locale object](#DOCS_GAME_SDK_ACHIEVEMENTS/achievement-locale-object)              |
+| description     | object           | the user-facing achievement description as an [achievement locale object](#DOCS_GAME_SDK_ACHIEVEMENTS/achievement-locale-object)  |
+| secret          | boolean          | if the achievement is secret                                                                                                      |
+| secure          | boolean          | if the achievement is secure                                                                                                      |
+| id              | Int64            | the unique id of the achievement                                                                                                  |
+| icon_hash       | string           | [the hash of the icon](#DOCS_REFERENCE/image-formatting)                                                                          |
+
+###### Achievement Locale Object
+
+| Name           | Description                                                                                                                     |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| default        | the default locale for the achievement                                                                                          |
+| localizations? | object of [accepted locales](#DOCS_DISPATCH_FIELD_VALUES/predefined-field-values-accepted-locales) as the key and achievement translations as the value          |
+
 ###### User Achievement Struct
 
 | name            | type   | description                                                                                |
@@ -21,13 +39,6 @@ You can also mark achievements as `secret` and `secure`. "Secret" achievements w
 | AchievementId   | Int64  | the unique id of the achievement                                                           |
 | PercentComplete | Int64  | how far along the user is to completing the achievement (0-100)                            |
 | UnlockedAt      | string | the timestamp at which the user completed the achievement (PercentComplete was set to 100) |
-
-###### Achievement Locale Object
-
-| Name           | Description                                                                                                                     |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| default        | the default locale for the achievement                                                                                          |
-| localizations? | object of [accepted locales](#DOCS_DISPATCH_FIELD_VALUES/predefined-field-values-accepted-locales) as the key and achievement translations as the value          |
 
 ## SetUserAchievement
 
@@ -228,13 +239,13 @@ Creates a new achievement for your application. Applications can have a maximum 
 
 ###### Parameters
 
-| name        | type          | description                             |
-| ----------- | ------------- | --------------------------------------- |
-| name        | object        | the name of the achievement             |
-| description | object        | the user-facing achievement description |
-| secret      | bool          | if the achievement is secret            |
-| secure      | bool          | if the achievement is secure            |
-| icon        | ImageType (?) | the icon for the achievement            |
+| name        | type              | description                             |
+| ----------- | ----------------- | --------------------------------------- |
+| name        | object            | the name of the achievement as an [achievement locale object](#DOCS_GAME_SDK_ACHIEVEMENTS/achievement-locale-object)            |
+| description | object            | the user-facing achievement description as an [achievement locale object](#DOCS_GAME_SDK_ACHIEVEMENTS/achievement-locale-object)|
+| secret      | boolean           | if the achievement is secret            |
+| secure      | boolean           | if the achievement is secure            |
+| icon        | ImageType (?)     | the icon for the achievement            |
 
 ###### Example: Creating an Achievement
 
@@ -248,7 +259,7 @@ Creates a new achievement for your application. Applications can have a maximum 
   },
   "secret": true,
   "secure": false,
-  "data": "data:image/png;base64,base64_data_here"
+  "icon": "data:image/png;base64,base64_data_here"
 }
 ```
 
@@ -278,13 +289,13 @@ Updates the achievement for **\_\_ALL USERS\_\_**. This is **NOT** to update a s
 
 ###### Parameters
 
-| name        | type          | description                             |
-| ----------- | ------------- | --------------------------------------- |
-| name        | object        | the name of the achievement             |
-| description | object        | the user-facing achievement description |
-| secret      | bool          | if the achievement is secret            |
-| secure      | bool          | if the achievement is secure            |
-| icon        | ImageType (?) | the icon for the achievement            |
+| name        | type             | description                             |
+| ----------- | ---------------- | --------------------------------------- |
+| name        | object           | the name of the achievement             |
+| description | object           | the user-facing achievement description |
+| secret      | boolean          | if the achievement is secret            |
+| secure      | boolean          | if the achievement is secure            |
+| icon        | ImageType (?)    | the icon for the achievement            |
 
 ###### Example: Updating an Achievement
 
@@ -298,7 +309,7 @@ Updates the achievement for **\_\_ALL USERS\_\_**. This is **NOT** to update a s
   },
   "secret": false,
   "secure": false,
-  "data": "data:image/png;base64,base64_data_here"
+  "icon": "data:image/png;base64,base64_data_here"
 }
 ```
 
